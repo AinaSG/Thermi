@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Random Movie</title>
+  <style type="text/css">
+    body {
+      width: 384px;
+      padding: 0px;
+      margin: 0px;
+    }
+    h1 {
+      word-wrap: break-word;
+      font-family:sans-serif;
+    }
+  </style>
+  <script src="https://use.fontawesome.com/071e94582a.js"></script>
+  <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="https://cdn.rawgit.com/dpiccone/ditherjs/master/dist/ditherjs.dist.js"></script>
+  <script>
+    var paletteBnW = [
+            [0,0,0],
+            [255,255,255]
+            ];
+    var options = {
+        "step": 1,
+        "palette": paletteBnW,
+        "algorithm": "diffusion"
+    };
+    ditherjs = new DitherJS(options);
+  </script>
+</head>
+<body>
+	<h1 style="background-color:black; color:white">A Movie for tonight</h1>
+	<div id="wrapper" style="width:100%; text-align:center">
+		<img onload="ditherjs.dither(this)" src="{{movie.poster_url}}" width="200px"> 
+	</div>
+	<h2><i class="fa fa-film" aria-hidden="true"></i>  {{movie.title}}</h2>
+	<p align="justify">{{movie.sinopsis}}</p>
+	<p><b><i class="fa fa-balance-scale" aria-hidden="true"></i> Rating: </b>
+	{% for n in range(fill_st) %}
+	<i class="fa fa-star" aria-hidden="true"></i>
+    {% endfor %}
+    {% for n in range(half_st) %}
+	<i class="fa fa-star-half-o" aria-hidden="true"></i>
+    {% endfor %}
+    {% for n in range(empt_st) %}
+	<i class="fa fa-star-o" aria-hidden="true"></i>
+    {% endfor %}<br>
+	   <b><i class="fa fa-tags" aria-hidden="true"></i> Genres: </b>{% for g in movie.genres %} {{g}}{{ "," if not loop.last }}{% endfor %}
+</body>
+</html>

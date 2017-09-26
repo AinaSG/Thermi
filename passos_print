@@ -1,0 +1,2 @@
+wkhtmltoimage --width 384 ./out.html ./out.png
+lp -o media=Custom.48x200mm -o fit-to-page -o position=top -d ZJ-58 out.png
